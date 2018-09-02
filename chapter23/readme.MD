@@ -1,0 +1,2 @@
+bootstrap没接触过，input-group里输入框右侧与输入按钮距离太远。
+找时间学习下bootstrap吧

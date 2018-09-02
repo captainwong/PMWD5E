@@ -1,0 +1,22 @@
+CREATE DATABASE bookmarks;
+
+USE bookmarks;
+
+create table user (
+    username varchar(16) not null primary key,
+    passwd char(40) not null,
+    email varchar(100) not null
+);
+
+create table bookmark (
+    username varchar(16) not null,
+    bm_url varchar(255) not null,
+    index (username),
+    index (bm_url),
+    PRIMARY key (username, bm_url)
+);
+
+grant select, insert, update, delete 
+on bookmarks.*
+to bm_user@localhost
+identified by 'bm_passwd';
