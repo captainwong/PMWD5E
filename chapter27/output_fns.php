@@ -1,14 +1,20 @@
 <?php
+
+
+// print an HTML header
 function do_html_header($title){
-    // print an HTML header
     echo '
         <!DOCTYPE html>
         <html>
         <head>
             <meta charset="utf-8" />
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <title><?php echo $title;?></title>
             <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>';
+    echo $title;
+
+    echo '
+            </title>
             <style>
                 body {
                     font-family: Arial, Helvetica, sans-serif; 
@@ -49,13 +55,13 @@ function do_html_header($title){
     }
 }
 
+// print an HTML footer
 function do_html_footer(){
-    // print an HTML footer
     echo '</body></html>';
 }
 
+// print heading
 function do_html_heading($heading){
-    // print heading
     echo '<h2>'.$heading.'</h2>';
 }
 
@@ -63,8 +69,8 @@ function do_html_url($url, $name){
     echo '<br><a href="'.$url.'">'.$name.'</a><br>';
 }
 
+// display some marketing info
 function display_site_info(){
-    // display some marketing info
     echo '
         <ul>
             <li>Store your bookmarks online with us!</li>
@@ -82,7 +88,7 @@ function display_login_form(){
                 <h2>Members Login Here</h2>
                 
                 <p>
-                    <label for="username">UserName:</label><br />>
+                    <label for="username">UserName:</label><br />
                     <input type="text" name="username" id="username" />
                 </p>
 
@@ -131,8 +137,8 @@ function display_registration_form(){
     ';
 }
 
+// display the table of urls
 function display_user_urls($url_array){
-    // display the table of urls
 
     // set global variable, so we can test later if this is on the page
     global $bm_table;
@@ -144,7 +150,7 @@ function display_user_urls($url_array){
         <table width="300" cellpadding="2" cellspacing="0" >
             <?php
                 $color = "#cccccc";
-                echo "<tr bgcolor=\"".$color."\"><td><strong>Bookmarks</strong></td><td><strong>Delte?</strong></td></tr>";
+                echo "<tr bgcolor=\"".$color."\"><td><strong>Bookmarks</strong></td><td><strong>Delete?</strong></td></tr>";
                 if (is_array($url_array) && (count($url_array) > 0)){
                     foreach($url_array as $url){
                         if($color == "#cccccc"){
@@ -155,7 +161,7 @@ function display_user_urls($url_array){
 
                         // remember to call htmlspecialchars() when we are displaying user data
                         echo "<tr bgcolor=\"".$color."\">
-                            <td><a href=\"".$url."\">".htmlspecialchars($url)."</a></td>
+                            <td><a href=\"".$url."\"  target=\"_blank\">".htmlspecialchars($url)."</a></td>
                             <td><input type=\"checkbox\" name=\"del_me[]\" value=\"".$url."\"</td>
                             </tr>";
                     }
@@ -169,8 +175,8 @@ function display_user_urls($url_array){
 <?php
 }
 
+// display the menu options on this page
 function display_user_menu(){
-    // display the menu options on this page
 ?>
 
     <hr>
@@ -200,8 +206,8 @@ function display_user_menu(){
 <?php
 }
 
+// display the form for people to enter a new bookmark in
 function display_add_bm_form(){
-    // display the form for people to enter a new bookmark in
 ?>
 
     <form name="bm_table" action="add_bms.php" method="post">
@@ -218,8 +224,8 @@ function display_add_bm_form(){
 <?php
 }
 
+// display html change password form
 function display_password_form(){
-    // display html change password form
 ?>
 
     <br>
@@ -245,8 +251,8 @@ function display_password_form(){
 <?php
 }
 
+// display HTML form to reset and email password
 function display_forgot_form(){
-    // display HTML form to reset and email password
 ?>
 
     <br>
@@ -264,32 +270,30 @@ function display_forgot_form(){
 <?php
 }
 
+// similar output to display_user_urls
+// instead of displaying the users bookmarks, display recommendation
 function display_recommend_urls($url_array){
-    // similar output to display_user_urls
-    // instead of displaying the users bookmarks, display recommendation
-?>
-    <br>
-    <table width="300" cellpadding="2" cellspacing="0">
-        <?php
-            $color="#cccccc";
-            echo '<tr bgcolor="'.$color.'"><td><strong>Recommendations</strong></td></tr>';
-            if(is_array($url_array) && (count($url_array) > 0)){
-                foreach($url_array as $url){
-                    if($color=="#cccccc"){
-                        $color="#ffffff";
-                    }else{
-                        $color="#cccccc";
-                    }
-                    echo '<tr bgcolor="'.$color.'"><td><a href="'.$url.'">'.htmlspecialchars($url).'</a></td></tr>';
-                }
-            }else{
-                echo '<tr><td>No recommendations for you today.</td></tr>';
-            }
-        ?>
+    echo '
+        <br>
+        <table width="300" cellpadding="2" cellspacing="0">
+    ';
         
-    </table>
+    $color="#cccccc";
+    echo '<tr bgcolor="'.$color.'"><td><strong>Recommendations</strong></td></tr>';
+    if(is_array($url_array) && (count($url_array) > 0)){
+        foreach($url_array as $url){
+            if($color=="#cccccc"){
+                $color="#ffffff";
+            }else{
+                $color="#cccccc";
+            }
+            echo '<tr bgcolor="'.$color.'"><td><a href="'.$url.'">'.htmlspecialchars($url).'</a></td></tr>';
+        }
+    }else{
+        echo '<tr><td>No recommendations for you today.</td></tr>';
+    }
 
-<?php
+    echo '</table>';
 }
 
 ?>
